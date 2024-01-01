@@ -1,4 +1,7 @@
 CONVERT_TO = promicro_rp2040
 
+SPLIT_KEYBOARD = yes
 ENCODER_MAP_ENABLE = yes
 OLED_ENABLE = yes
+WPM_ENABLE = yes
+LTO_ENABLE = yes

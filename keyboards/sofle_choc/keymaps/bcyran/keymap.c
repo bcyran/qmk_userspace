@@ -60,30 +60,20 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 };
 #endif
 
+#define ANIM_INVERT false
+#define ANIM_RENDER_WPM true
+#define FAST_TYPE_WPM 45
+
 #ifdef OLED_ENABLE
-bool oled_task_user(void) {
-    oled_write_P(PSTR("Layer: "), false);
-
-    switch (get_highest_layer(layer_state)) {
-        case _QW:
-            oled_write_ln_P(PSTR("QWERTY"), false);
-            break;
-        case _SM:
-            oled_write_ln_P(PSTR("SYMBOL"), false);
-            break;
-        case _FN:
-            oled_write_ln_P(PSTR("FUNCTION"), false);
-            break;
-        default:
-            oled_write_ln_P(PSTR("Undefined"), false);
+#include "music-bars.c"
+oled_rotation_t oled_init_user(oled_rotation_t rotation) {
+    if (!is_keyboard_master()) {
+        return OLED_ROTATION_180;
     }
-
-    // Host Keyboard LED Status
-    led_t led_state = host_keyboard_led_state();
-    oled_write_P(led_state.num_lock ? PSTR("NUM ") : PSTR("    "), false);
-    oled_write_P(led_state.caps_lock ? PSTR("CAP ") : PSTR("    "), false);
-    oled_write_P(led_state.scroll_lock ? PSTR("SCR ") : PSTR("    "), false);
-
+    return rotation;
+}
+bool oled_task_user(void) {
+    oled_render_anim();
     return false;
 }
 #endif
