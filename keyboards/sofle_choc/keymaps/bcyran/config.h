@@ -22,7 +22,12 @@
 // is the slave.
 //
 // I've found this helps with some ProMicros where the slave does not boot
-#define SPLIT_USB_DETECT
+/*#define SPLIT_USB_DETECT*/
+/*#define SPLIT_USB_TIMEOUT 10000*/
+/*#define SPLIT_USB_TIMEOUT_POLL 10*/
+
+#define NO_USB_STARTUP_CHECK
+#define EE_HANDS
 
 #define RGB_DISABLE_WHEN_USB_SUSPENDED     // turn off effects when suspended
 #define SPLIT_TRANSPORT_MIRROR             // If LED_MATRIX_KEYPRESSES or LED_MATRIX_KEYRELEASES is enabled, you also will want to enable SPLIT_TRANSPORT_MIRROR
